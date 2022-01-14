@@ -3,8 +3,8 @@ import { ActivityIndicator, View, StyleSheet, Image, Text, Alert } from 'react-n
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LogoImage from '../components/image/LogoImage';
-const Splash_Screen = ({navigation}) => {
+import LogoImage from '../components/image_containers/LogoImage';
+const SplashScreen = ({navigation}) => {
   
   const [animating, setAnimating] = useState(false);
 
@@ -32,7 +32,7 @@ const Splash_Screen = ({navigation}) => {
   );
 };
 
-export default Splash_Screen;
+export default SplashScreen;
 
 const styles = StyleSheet.create({
   container: {

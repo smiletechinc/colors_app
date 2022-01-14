@@ -9,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { PrimaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
-const Add_Color = ( {navigation } ) => {
+const AddColorScreen = ( {navigation } ) => {
 
   const [redSlider, setRedSliderValue] = useState(15);
   const [greenSlider, setGreenSliderValue] = useState(15);
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Add_Color;
+export default AddColorScreen;
 
 
  
