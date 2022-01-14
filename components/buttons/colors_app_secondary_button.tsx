@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 
-const SecondaryButton = ( {title, onPress} ) => {
+type SecondaryButtonProps = {
+    title: string;
+    onPress: any;
+}
+const SecondaryButton: React.FunctionComponent<SecondaryButtonProps> = (  props  ) => {
+    const {title, onPress} = props;
     return(
      <View>
         <TouchableOpacity onPress={onPress}>

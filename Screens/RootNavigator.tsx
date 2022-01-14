@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Card } from 'react-native-paper';
+
 
 import SplashScreen from './Splash_Screen';
 import LandingScreen from './Landing_Screen';

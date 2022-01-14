@@ -2,13 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const AppTextInput = ( {placeholder, onChangeText, defaultValue, secureTextEntry, keyboardType, error, focus  } ) => {
+type Input = {
+  placeholder: string;
+  onChangeText: any;
+  defaultValue: any;
+  secureTextEntry?: boolean;
+  keyboardType?: any;
+  error?: string;
+  foucs?: boolean;
+}
+const AppTextInput:React.FunctionComponent<Input> = ( props ) => {
+  const {placeholder, onChangeText, defaultValue, secureTextEntry, keyboardType, error, foucs} = props;
 
-  console.log(error);
-  console.log(focus);
     return(
      <View style={styles.container}>
-        <View style={[styles.inputView, {borderColor: focus ? '98d3d3' : '#ff0f0f'}]}>
+        <View style={[styles.inputView, {borderColor: error?.trim().length != 0 ? '#ff0f0f' : '#98d3d3'}]}> 
         <TextInput
                 style={styles.TextInput}
                 placeholder={placeholder}
@@ -18,13 +26,14 @@ const AppTextInput = ( {placeholder, onChangeText, defaultValue, secureTextEntry
                 keyboardType = {keyboardType}
             />
         </View>
+        <Text style={{marginTop:-16, marginBottom:8}}>{error}</Text>
     </View> 
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-          alignItems: 'center', justifyContent: 'center',
+        alignItems: 'center', justifyContent: 'center',
         backgroundColor: '#31A8A8',
       },
       inputView: {

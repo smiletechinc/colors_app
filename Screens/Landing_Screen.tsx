@@ -2,11 +2,16 @@ import * as React from 'react';
 import {  Text, View, Image, StyleSheet, Button, Alert } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Card } from 'react-native-paper';
-import LogoImage  from '../components/image/LogoImage';
-import { PrimaryButton } from '../components/buttons/colors_buttons';
 
-const LandingScreen = ({ navigation }) => {
+import LogoImage  from '../components/image/LogoImage';
+import { PrimaryButton } from '../components/buttons';
+type Props = {
+  navigation: any
+}
+
+const LandingScreen: React.FunctionComponent<Props> = (props) => {
+  const {navigation} = props;
+  
   const LogFunc = () => {
     navigation.replace('LoginScreen')
   }
