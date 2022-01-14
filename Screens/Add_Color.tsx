@@ -7,7 +7,7 @@ import {View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Button} from 're
 import Slider from '@react-native-community/slider';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { PrimaryButton } from '../components/buttons/colors_buttons';
+import { PrimaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
 const Add_Color = ( {navigation } ) => {
 
@@ -16,13 +16,13 @@ const Add_Color = ( {navigation } ) => {
   const [blueSlider, setBlueSliderValue] = useState(15);
   const [hexCode, setHexCode] = useState('#151515');
   const [colorName, setColorName] = useState('');
- 
+  const [errorV, setErrorV] = useState('');
 
-  convertSingleCode = ( colorCode ) => { 
+  const convertSingleCode = ( colorCode ) => { 
     let tempHexCode = colorCode.toString(16); 
     return (tempHexCode.length == 1) ? ('0' + tempHexCode) : tempHexCode; 
   } 
-  rgbToHex = ( redSlider, greenSlider, blueSlider ) => { 
+  const rgbToHex = ( redSlider, greenSlider, blueSlider ) => { 
     if( isNaN( redSlider ) || isNaN( greenSlider ) || isNaN( blueSlider ) ) 
     { alert('Incorrect RGB Color Code!!!'); 
     return; 
@@ -32,7 +32,7 @@ const Add_Color = ( {navigation } ) => {
       convertSingleCode(blueSlider)) 
     } 
   }
-  updateHexValue = () => {
+  const updateHexValue = () => {
     rgbToHex(redSlider, greenSlider,blueSlider)
   }
 
@@ -47,7 +47,6 @@ const Add_Color = ( {navigation } ) => {
       code: hexCode,
     }
   });
-
   
   }
   return (
@@ -69,7 +68,7 @@ const Add_Color = ( {navigation } ) => {
           onValueChange={
             (sliderValue) => setRedSliderValue(sliderValue)
           }
-          redSlider={redSlider}
+          // redSlider={redSlider}
         />
         
         <Slider
@@ -82,7 +81,7 @@ const Add_Color = ( {navigation } ) => {
           onValueChange={
             (sliderValue) => setGreenSliderValue(sliderValue)
           }
-          greenSlider={greenSlider}
+          // greenSlider={greenSlider}
         />
         <Slider
           maximumValue={255}
@@ -94,7 +93,7 @@ const Add_Color = ( {navigation } ) => {
           onValueChange={
             (sliderValue) => setBlueSliderValue(sliderValue)
           }
-          blueSlider={blueSlider}
+          // blueSlider={blueSlider}
         />
           <Text style = { styles.text }>
         RGB: rgb({ redSlider }, { greenSlider }, { blueSlider })
@@ -111,6 +110,7 @@ const Add_Color = ( {navigation } ) => {
         onChangeText={(text) => {text !== '' && text !== null && text !== undefined && setRedSliderValue(Number(text))}} 
         keyboardType={'numeric'} 
         defaultValue={String(redSlider)} 
+        error={errorV}
         />
         </View>
         <View>
@@ -119,6 +119,7 @@ const Add_Color = ( {navigation } ) => {
         onChangeText={(text) => {text !== '' && text !== null && text !== undefined && setGreenSliderValue(Number(text))}} 
         keyboardType={'numeric'} 
         defaultValue={String(greenSlider)} 
+        error={errorV}
         />
         </View>
         <View>
@@ -127,10 +128,11 @@ const Add_Color = ( {navigation } ) => {
         onChangeText={(text) => {text !== '' && text !== null && text !== undefined && setBlueSliderValue(Number(text))}} 
         keyboardType={'numeric'} 
         defaultValue={String(blueSlider)} 
+        error={errorV}
         />
       </View>
         <View>
-        <AppTextInput placeholder="Add Color Name" onChangeText={text => setColorName(text)} defaultValue={colorName} />
+        <AppTextInput placeholder="Add Color Name" onChangeText={text => setColorName(text)} defaultValue={colorName} error={errorV}/>
         </View>
         <PrimaryButton 
           title='Add Color'

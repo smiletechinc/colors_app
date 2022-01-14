@@ -1,20 +1,38 @@
 {
-    "compilerOptions": {
-      "allowJs": true,
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "isolatedModules": true,
-      "jsx": "react-native",
-      "lib": ["es2017"],
-      "moduleResolution": "node",
-      "noEmit": true,
-      "strict": true,
-      "target": "esnext"
-    },
-    "exclude": [
-      "node_modules",
-      "babel.config.js",
-      "metro.config.js",
-      "jest.config.js"
-    ]
-  }
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@images/*":["./public/images"],
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/Navbar.js",
+    "store/tick/reducer.js",
+    "store/tick/action.js",
+    "store/count/reducer.js",
+    "store/count/action.js",
+    "components/Clock.js",
+    "components/AddCount.ts",
+    "components/Page.js",
+    "store/store", "network/gatherings.js"
+  ],
+  "exclude": ["node_modules"]
+}

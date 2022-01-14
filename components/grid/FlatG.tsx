@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
+// import {Colors} from './../../type';
 
-export default function Example(props) {
+type Props = {
+  colors: any
+}
+
+const FlatG: FunctionComponent<Props> = (props) =>  {
+  const {colors} = props
 
 return (    
 
     <FlatGrid
       itemDimension={100}
-      data={props.c}
+      data={colors}
       style={styles.gridView}
       // staticDimension={300}
       // fixed
@@ -46,3 +52,5 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+
+export default FlatG;
