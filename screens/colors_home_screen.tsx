@@ -7,7 +7,7 @@ import FlatG from '../components/grid';
 import AddColorScreen from './colors_add_color_screen';
 import { FlatGrid } from 'react-native-super-grid';
 import {dummyColors} from '../resources/dummy_data/dummy_colors';
-// import { Colors } from 'types';
+import {styles} from './index';
 
 type Props = {
   navigation: any;
@@ -48,7 +48,7 @@ useEffect(() => {
 }, [colors]);
 
   useEffect(() => {
-console.log('total');
+  console.log('total');
   }, [total]);
 
   useEffect(() => {
@@ -75,44 +75,11 @@ const onRefresh = () => {
 };
 
   return (
-    <View style={styles.MainContainer}>
+    <View style={styles.container}>
           <FlatG colors={colors}/>
           <IconButton  onPress={SampleFunction} />
-        {/* <TouchableOpacity activeOpacity={0.5} onPress={SampleFunction} style={styles.TouchableOpacityStyle} >
-          <Image source={require('../resources/images/icon_plus.png')}
-                 style={styles.FloatingButtonStyle} /> 
-        </TouchableOpacity> */}
       </View>
   );
 }
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
- 
-  MainContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor : '#31A8A8'
-  },
- 
-  TouchableOpacityStyle:{
-
-    position: 'absolute',
-    width: 48,
-    height: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 32,
-    bottom: 32,
-    backgroundColor: '#009688',
-    borderRadius: 25,
-  },
- 
-  FloatingButtonStyle: {
-    resizeMode: 'cover',
-    width: 24,
-    height: 24,
-  }
-}); 

@@ -2,9 +2,10 @@ import * as React from 'react';
 import {  Text, View, Image, StyleSheet, Button, Alert } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import LogoImage  from '../components/image_containers/LogoImage';
 import { PrimaryButton } from '../components/buttons';
+import {styles} from './index';
+
 type Props = {
   navigation: any
 }
@@ -21,7 +22,7 @@ const LandingScreen: React.FunctionComponent<Props> = (props) => {
   }
 
   return (
-     <View style={styles.container}>
+     <View style={styles.loginContainer}>
 
      <LogoImage />
 
@@ -36,8 +37,5 @@ const LandingScreen: React.FunctionComponent<Props> = (props) => {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#31A8A8',},
-});
 
 export default LandingScreen;

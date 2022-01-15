@@ -4,6 +4,7 @@ import LandingScreen from "./colors_landing_screen";
 import LoginScreen from "./colors_login_screen";
 import SignupScreen from "./colors_signup_screen";
 import SplashScreen from "./colors_splash_screen";
+import styles from "./colors_screen_style";
 
 export {
     AddColorScreen,
@@ -11,5 +12,6 @@ export {
     LandingScreen,
     LoginScreen,
     SignupScreen,
-    SplashScreen
+    SplashScreen,
+    styles,
 }

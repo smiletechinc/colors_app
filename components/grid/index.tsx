@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
+import styles from "./grid_style";
 // import {Colors} from './../../type';
 
 type Props = {
-  colors: any
+  colors: any;
 }
 
 const FlatG: FunctionComponent<Props> = (props) =>  {
@@ -29,28 +30,5 @@ return (
     />
   );
 }
-
-const styles = StyleSheet.create({
-  gridView: {
-    marginTop: 10,
-    flex: 1,
-  },
-  itemContainer: {
-    justifyContent: 'flex-end',
-    borderRadius: 5,
-    padding: 10,
-    height: 150,
-  },
-  itemName: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: '600',
-  },
-  itemCode: {
-    fontWeight: '600',
-    fontSize: 12,
-    color: '#fff',
-  },
-});
 
 export default FlatG;
