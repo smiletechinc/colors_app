@@ -9,12 +9,12 @@ import {  Text,
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LogImage from '../components/image/LogImage';
+import LogImage from '../components/image_containers/LogImage';
 // import AppButton from '../components/colors_app-button';
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { PrimaryButton, } from '../components/buttons'
 import { useEffect } from 'react';
-const Signup_Screen = ({ navigation }) => {
+const SignupScreen = ({ navigation }) => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
     flex: 1, backgroundColor: "#31A8A8", },
 });
 
-export default Signup_Screen;
+export default SignupScreen;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Button, Alert, TouchableOpacity, Image} from 'react-native';
-import { IconButton } from './../components/buttons';
+import { IconButton } from '../components/buttons';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import FlatG from './../components/grid/FlatG';
-import AddColorScreen from './Add_Color';
+import FlatG from '../components/grid';
+import AddColorScreen from './colors_add_color_screen';
 import { FlatGrid } from 'react-native-super-grid';
-import {dummyColors} from '../resources/files/dummy_data/dummy_colors';
+import {dummyColors} from '../resources/dummy_data/dummy_colors';
 // import { Colors } from 'types';
 
 type Props = {

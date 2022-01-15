@@ -3,7 +3,7 @@ import {  Text, View, Image, StyleSheet, Button, Alert } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LogoImage  from '../components/image/LogoImage';
+import LogoImage  from '../components/image_containers/LogoImage';
 import { PrimaryButton } from '../components/buttons';
 type Props = {
   navigation: any

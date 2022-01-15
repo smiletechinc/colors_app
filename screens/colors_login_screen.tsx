@@ -2,12 +2,12 @@ import  React, { useState } from 'react';
 import { Text, View, StyleSheet, } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LogImage from '../components/image/LogImage';
+import LogImage from '../components/image_containers/LogImage';
 import { PrimaryButton, TextButton } from '../components/buttons'
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { useEffect } from 'react';
 
-const Login_Screen = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPaswword] = useState('');
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#31A8A8", },
 });
 
-export default Login_Screen;
+export default LoginScreen;
