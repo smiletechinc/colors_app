@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button, Alert, TouchableOpacity, Image} from 'r
 import { IconButton } from '../components/buttons';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import FlatG from '../components/grid';
+import { FlatG } from '../components/grid';
 import AddColorScreen from './colors_add_color_screen';
 import { FlatGrid } from 'react-native-super-grid';
 import {dummyColors} from '../resources/dummy_data/dummy_colors';

@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-
-
 //import all the components we are going to use
 import {View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Button} from 'react-native';
 
@@ -9,15 +7,16 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { PrimaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
-const AddColorScreen = ( {navigation } ) => {
+const AddColorScreen = ( {navigation, route } ) => {
 
-  const [redSlider, setRedSliderValue] = useState(15);
-  const [greenSlider, setGreenSliderValue] = useState(15);
-  const [blueSlider, setBlueSliderValue] = useState(15);
-  const [hexCode, setHexCode] = useState('#151515');
+  const [redSlider, setRedSliderValue] = useState(0);
+  const [greenSlider, setGreenSliderValue] = useState(0);
+  const [blueSlider, setBlueSliderValue] = useState(0);
+  const [hexCode, setHexCode] = useState('');
   const [colorName, setColorName] = useState('');
   const [errorV, setErrorV] = useState('');
-
+  const [type, setType] = useState(route && route.params && route.params.type)
+  
   const convertSingleCode = ( colorCode ) => { 
     let tempHexCode = colorCode.toString(16); 
     return (tempHexCode.length == 1) ? ('0' + tempHexCode) : tempHexCode; 
@@ -36,18 +35,57 @@ const AddColorScreen = ( {navigation } ) => {
     rgbToHex(redSlider, greenSlider,blueSlider)
   }
 
+  const hex2rgba = (hex, alpha = 1) => {
+    const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
+    setRedSliderValue(r);
+    setGreenSliderValue(g);
+    setBlueSliderValue(b);
+
+  };
+
+  useEffect(()=>{
+    if (type && type === "EditColor") { 
+      navigation.setOptions({title:'Edit Color'})
+    } 
+    else {
+      navigation.setOptions({title:'Add Color'})
+    }   
+  }, [navigation]);
+
+  useEffect(()=>{
+    if(type && type == 'EditColor'){
+      setColorName(route.params.item.name);  
+      //alert(route.params.item.code);
+      setHexCode(route.params.item.code);
+      console.log(route.params.item.index);
+      hex2rgba(route.params.item.code,1);
+    }
+    else{
+      setColorName('');
+    }
+  }, [route && route.params]);
+
   useEffect(() => {
     updateHexValue();
   }, [redSlider, greenSlider, blueSlider]);
 
   const colorBookmark = () => {
-  navigation.navigate('HomeScreen', {
-    color : {
-      name: colorName,
-      code: hexCode,
+    if(type && type == 'EditColor'){
+      navigation.goBack({
+        item: {
+          name: colorName,
+          code: hexCode,
+        }
+      });
     }
-  });
-  
+    else{
+      navigation.navigate('HomeScreen', {
+        color : {
+          name: colorName,
+          code: hexCode,
+        }
+      });
+    }
   }
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -64,11 +102,11 @@ const AddColorScreen = ( {navigation } ) => {
           minimumTrackTintColor={`rgb(${redSlider}, 0, 0)`}
           maximumTrackTintColor='#98d3d3'
           step={1}
-          value={0}
+          value={redSlider}
           onValueChange={
             (sliderValue) => setRedSliderValue(sliderValue)
           }
-          // redSlider={redSlider}
+          //redSlider={redSlider}
         />
         
         <Slider
@@ -77,11 +115,11 @@ const AddColorScreen = ( {navigation } ) => {
           minimumTrackTintColor={`rgb(0, ${greenSlider}, 0)`}
           maximumTrackTintColor='#98d3d3'
           step={1}
-          value={0}
+          value={greenSlider}
           onValueChange={
             (sliderValue) => setGreenSliderValue(sliderValue)
           }
-          // greenSlider={greenSlider}
+          //greenSlider={greenSlider}
         />
         <Slider
           maximumValue={255}
@@ -89,11 +127,11 @@ const AddColorScreen = ( {navigation } ) => {
           minimumTrackTintColor={`rgb(0,0,${blueSlider})`}
           maximumTrackTintColor='#98d3d3'
           step={1}
-          value={0}
+          value={blueSlider}
           onValueChange={
             (sliderValue) => setBlueSliderValue(sliderValue)
           }
-          // blueSlider={blueSlider}
+         // blueSlider={String(blueSlider)}
         />
           <Text style = { styles.text }>
         RGB: rgb({ redSlider }, { greenSlider }, { blueSlider })
@@ -135,7 +173,7 @@ const AddColorScreen = ( {navigation } ) => {
         <AppTextInput placeholder="Add Color Name" onChangeText={text => setColorName(text)} defaultValue={colorName} error={errorV}/>
         </View>
         <PrimaryButton 
-          title='Add Color'
+          title={type && type === "EditColor" ? "Update Color" : "Add Color"}
          onPress={colorBookmark}
        />
 
