@@ -25,10 +25,10 @@ const FlatG: FunctionComponent<Props> = (props) =>  {
      item : {
      name: item.name,
      code: item.code,
-     id: item.index,
    },
    options:{title:"Edit Color"},
    type:"EditColor",
+   colorIndex: index,
   });
  }
   
@@ -39,16 +39,17 @@ const FlatG: FunctionComponent<Props> = (props) =>  {
       itemDimension={100}
       data={colors}
       style={styles.gridView}
+      // keyExtractor={(item) => item.id.toString()}
       // staticDimension={300}
       // fixed
       spacing={10}
       renderItem={({ item, index }) => (
-        <TouchableOpacity onPress={()=>moveitem(item,index)}>
+        <TouchableOpacity onPress={()=>moveitem(item, index)}>
           <View style={[styles.itemContainer, { backgroundColor: item.code }]}>
             <Text style={styles.itemName}>{item.name}</Text>
             <Text style={styles.itemCode}>{item.code}</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> 
       )}
     />
   );

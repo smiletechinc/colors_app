@@ -56,8 +56,8 @@ const AddColorScreen = ( {navigation, route } ) => {
     if(type && type == 'EditColor'){
       setColorName(route.params.item.name);  
       //alert(route.params.item.code);
-      setHexCode(route.params.item.code);
-      console.log(route.params.item.index);
+      setHexCode(route.params.item.code); 
+      console.log(route.params.colorIndex);
       hex2rgba(route.params.item.code,1);
     }
     else{
@@ -70,22 +70,14 @@ const AddColorScreen = ( {navigation, route } ) => {
   }, [redSlider, greenSlider, blueSlider]);
 
   const colorBookmark = () => {
-    if(type && type == 'EditColor'){
-      navigation.goBack({
-        item: {
-          name: colorName,
-          code: hexCode,
-        }
-      });
-    }
-    else{
-      navigation.navigate('HomeScreen', {
-        color : {
-          name: colorName,
-          code: hexCode,
-        }
-      });
-    }
+    navigation.navigate('HomeScreen', {
+      color : {
+        name: colorName,
+        code: hexCode,
+      },
+      type : 'EditColor',
+      colorIndex: route && route.params && route.params.colorIndex && route.params.colorIndex,
+    });
   }
   return (
     <SafeAreaView style={{flex: 1}}>

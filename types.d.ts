@@ -1,7 +1,7 @@
 declare type Color = {
+    id: number,
     name: string,
     code: string,
-    index: number
 }
 
-declare type Colors = ReadonlyArray<Color>;
+declare type Colors = Array<Color>;
