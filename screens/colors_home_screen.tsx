@@ -3,63 +3,44 @@ import { Text, View, StyleSheet, Button, Alert, TouchableOpacity, Image} from 'r
 import { IconButton } from '../components/buttons';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import FlatG from '../components/grid';
+import { FlatG } from '../components/grid';
 import AddColorScreen from './colors_add_color_screen';
 import { FlatGrid } from 'react-native-super-grid';
-import {dummyColors} from '../resources/dummy_data/dummy_colors';
+// import {dummyColors} from '../resources/dummy_data/dummy_colors';
 // import { Colors } from 'types';
 
 type Props = {
   navigation: any;
   route: any;
+  reduxColors: Colors;
 }
 
 const HomeScreen: React.FunctionComponent<Props> = (props) => {
-  const {navigation, route} = props;
-
+  const {navigation, route, reduxColors} = props;
   const [isFetching, setIsFetching] = useState(false);
-  const [colors, setColors] = useState<Colors>(dummyColors);
-  // const [colors, setColors] = useState([  
-  //   { name: 'TURQUOISE', code: '#1abc9c' },
-  //   { name: 'EMERALD', code: '#2ecc71' },
-  //   { name: 'PETER RIVER', code: '#3498db' },
-  //   { name: 'AMETHYST', code: '#9b59b6' },
-  //   { name: 'WET ASPHALT', code: '#34495e' },
-  //   { name: 'GREEN SEA', code: '#16a085' },
-  //   { name: 'NEPHRITIS', code: '#27ae60' },
-  //   { name: 'BELIZE HOLE', code: '#2980b9' },
-  //   { name: 'WISTERIA', code: '#8e44ad' },
-  //   { name: 'MIDNIGHT BLUE', code: '#2c3e50' },
-  //   { name: 'SUN FLOWER', code: '#f1c40f' },
-  //   { name: 'CARROT', code: '#e67e22' },
-  //   { name: 'ALIZARIN', code: '#e74c3c' },
-  //   { name: 'CLOUDS', code: '#ecf0f1' },
-  //   { name: 'CONCRETE', code: '#95a5a6' },
-  //   { name: 'ORANGE', code: '#f39c12' },
-  //   { name: 'PUMPKIN', code: '#d35400' },
-  //   { name: 'POMEGRANATE', code: '#c0392b' },
-  //   { name: 'SILVER', code: '#bdc3c7' },
-  //   { name: 'ASBESTOS', code: '#7f8c8d' },
-  // ]);
-  const [total, setTotal] = useState(dummyColors.length);
-
-useEffect(() => {
-  console.log('dummyColors: ', dummyColors);
-}, [colors]);
+  const [colors, setColors] = useState<Colors>(reduxColors);
+  const [updatingColors, setUpdatingColors] = useState<boolean>(false);
 
   useEffect(() => {
-console.log('total');
-  }, [total]);
+    console.log('dummyColors: ', reduxColors);
+  }, [colors]);
 
   useEffect(() => {
+    setUpdatingColors(true);
     if(route.params) {
-      const { color } = route.params;
+      const { color, colorIndex } = route.params;
       console.log('Params: ', route.params);
       let tempColors = colors;
-      tempColors.push(color);
+      console.log('Color index:', colorIndex);
+      if (colorIndex) {
+        console.log('First')
+        tempColors[colorIndex] = color;
+      } else {
+        tempColors.push(color);
+      }
       setColors(tempColors);
-      setTotal(tempColors.length);
     }
+setUpdatingColors(false);
   }, [route.params]);
 
   useEffect(() => {
@@ -76,17 +57,15 @@ const onRefresh = () => {
 
   return (
     <View style={styles.MainContainer}>
-          <FlatG colors={colors}/>
-          <IconButton  onPress={SampleFunction} />
-        {/* <TouchableOpacity activeOpacity={0.5} onPress={SampleFunction} style={styles.TouchableOpacityStyle} >
-          <Image source={require('../resources/images/icon_plus.png')}
-                 style={styles.FloatingButtonStyle} /> 
-        </TouchableOpacity> */}
+      {!updatingColors && <View>
+        <FlatG colors={colors}/>
+        <IconButton onPress={SampleFunction} />
+      </View>}
       </View>
   );
 }
 
-export default HomeScreen;
+export default HomeScreen;  
 
 const styles = StyleSheet.create({
  

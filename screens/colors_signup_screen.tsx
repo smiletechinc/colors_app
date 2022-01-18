@@ -53,6 +53,10 @@ const SignupScreen = ({ navigation }) => {
       navigation.replace('LoginScreen');
     }
   }
+  const log = () =>{
+    navigation.replace('LoginScreen');
+  }
+
   return (
      <View style={styles.container}>
      <LogImage />
@@ -73,7 +77,7 @@ const SignupScreen = ({ navigation }) => {
       </View>
       <Text> Already Have Account Click On LogIn Button</Text>
       <View>
-        <PrimaryButton title='Login' onPress={LogFunc} />
+        <PrimaryButton title='Login' onPress={log} />
       </View>
     </View>
   );
