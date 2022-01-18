@@ -1,19 +1,14 @@
 import React, {useState} from 'react';
-import {  Text, 
-          View, 
-          TextInput,
-          StyleSheet, 
-          Button, 
-          Image,
-          Alert } from 'react-native';
+import {  Text, View, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import LogImage from '../components/image_containers/LogImage';
 // import AppButton from '../components/colors_app-button';
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { PrimaryButton, } from '../components/buttons'
 import { useEffect } from 'react';
+import {styles} from './index';
+
 const SignupScreen = ({ navigation }) => {
 
   const [name, setName] = useState('');
@@ -58,7 +53,7 @@ const SignupScreen = ({ navigation }) => {
   }
 
   return (
-     <View style={styles.container}>
+     <View style={styles.loginContainer}>
      <LogImage />
       <View>
         <AppTextInput placeholder="Enter Name" onChangeText={text => setName(text)} defaultValue={name} error={nameError}/>
@@ -82,10 +77,5 @@ const SignupScreen = ({ navigation }) => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, backgroundColor: "#31A8A8", },
-});
 
 export default SignupScreen;

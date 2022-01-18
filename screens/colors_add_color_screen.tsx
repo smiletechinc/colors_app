@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 //import all the components we are going to use
 import {View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Button} from 'react-native';
-
 import Slider from '@react-native-community/slider';
 import { NavigationContainer } from '@react-navigation/native';
-
 import { PrimaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
+import {styles} from './index';
+
 const AddColorScreen = ( {navigation, route } ) => {
 
   const [redSlider, setRedSliderValue] = useState(0);
@@ -81,8 +81,8 @@ const AddColorScreen = ( {navigation, route } ) => {
   }
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={styles.container}>
-        <View style={{alignItems: 'center', justifyContent: 'center',}}>
+      <View style={styles.addColorcontainer}>
+        <View style={styles.sliderview}>
             <View style={{backgroundColor:`rgb(${redSlider},${greenSlider},${blueSlider})`, width: 96, height: 72}}>
             </View> 
         </View>
@@ -125,13 +125,13 @@ const AddColorScreen = ( {navigation, route } ) => {
           }
          // blueSlider={String(blueSlider)}
         />
-          <Text style = { styles.text }>
+          <Text style = { styles.slidertext}>
         RGB: rgb({ redSlider }, { greenSlider }, { blueSlider })
         </Text> 
-        <Text style = { styles.text}> 
+        <Text style = { styles.slidertext}> 
         HEX: { hexCode }
         </Text>
-        <Text style={styles.text}> 
+        <Text style={styles.slidertext}> 
             Give Value in RGB
         </Text>
         <View>
@@ -173,50 +173,6 @@ const AddColorScreen = ( {navigation, route } ) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#31A8A8',
-  },
-  inputView: {
-    backgroundColor: "#98d3d3",
-    borderRadius: 30,
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 50
-  },
-  text: {
-    marginTop: 10,
-    fontSize: 20,
-  },
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 20,
-  },
-
-  forgot_button: {
-    height: 80,
-    marginBottom: 10,
-  },
-
-  loginBtn: {
-    width: "70%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#009688",
-    marginLeft: 50
-  },
-});
 
 export default AddColorScreen;
 

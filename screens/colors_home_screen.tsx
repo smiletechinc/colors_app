@@ -6,8 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FlatG } from '../components/grid';
 import AddColorScreen from './colors_add_color_screen';
 import { FlatGrid } from 'react-native-super-grid';
-// import {dummyColors} from '../resources/dummy_data/dummy_colors';
+import {dummyColors} from '../resources/dummy_data/dummy_colors';
 // import { Colors } from 'types';
+import {styles} from './index';
 
 type Props = {
   navigation: any;
@@ -18,7 +19,7 @@ type Props = {
 const HomeScreen: React.FunctionComponent<Props> = (props) => {
   const {navigation, route, reduxColors} = props;
   const [isFetching, setIsFetching] = useState(false);
-  const [colors, setColors] = useState<Colors>(reduxColors);
+  const [colors, setColors] = useState<Colors>(dummyColors);
   const [updatingColors, setUpdatingColors] = useState<boolean>(false);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const onRefresh = () => {
 };
 
   return (
-    <View style={styles.MainContainer}>
+    <View style={styles.container}>
       {!updatingColors && <View>
         <FlatG colors={colors}/>
         <IconButton onPress={SampleFunction} />
@@ -66,32 +67,3 @@ const onRefresh = () => {
 }
 
 export default HomeScreen;  
-
-const styles = StyleSheet.create({
- 
-  MainContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor : '#31A8A8'
-  },
- 
-  TouchableOpacityStyle:{
-
-    position: 'absolute',
-    width: 48,
-    height: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 32,
-    bottom: 32,
-    backgroundColor: '#009688',
-    borderRadius: 25,
-  },
- 
-  FloatingButtonStyle: {
-    resizeMode: 'cover',
-    width: 24,
-    height: 24,
-  }
-}); 

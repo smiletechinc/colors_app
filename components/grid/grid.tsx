@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import styles from "./grid_style";
 import {AddColorScreen} from '../../screens/index';
 import { PrimaryButton } from '../buttons';
 import { useNavigation } from '@react-navigation/native';
+import {styles} from './index';
 
 // import {Colors} from './../../type';
 
