@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 //import all the components we are going to use
 import {View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Button} from 'react-native';
-
 import Slider from '@react-native-community/slider';
 import { NavigationContainer } from '@react-navigation/native';
-
 import { PrimaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
-const AddColorScreen = ( {navigation, route } ) => {
+import { connect } from 'react-redux';
+import { addColor, updateColor } from '../redux/action/color';
+import { Dispatch } from "redux"
+import { useDispatch } from "react-redux"
 
+const AddColorScreen = ( props ) => {
+
+  const {navigation, route, add} = props;
+  const dispatch: Dispatch<any> = useDispatch()
   const [redSlider, setRedSliderValue] = useState(0);
   const [greenSlider, setGreenSliderValue] = useState(0);
   const [blueSlider, setBlueSliderValue] = useState(0);
@@ -57,7 +62,7 @@ const AddColorScreen = ( {navigation, route } ) => {
       setColorName(route.params.item.name);  
       //alert(route.params.item.code);
       setHexCode(route.params.item.code); 
-      console.log(route.params.colorIndex);
+      console.log(route.params.item.id);
       hex2rgba(route.params.item.code,1);
     }
     else{
@@ -70,14 +75,28 @@ const AddColorScreen = ( {navigation, route } ) => {
   }, [redSlider, greenSlider, blueSlider]);
 
   const colorBookmark = () => {
-    navigation.navigate('HomeScreen', {
-      color : {
+    if(type && type === "EditColor"){
+      console.log("editcolor action called");
+      console.log("editcolorid: ", route.params.item.id);
+      const color: Color = {
+        id: route.params.item.id,
         name: colorName,
         code: hexCode,
-      },
-      type : 'EditColor',
-      colorIndex: route && route.params && route.params.colorIndex && route.params.colorIndex,
-    });
+      }
+
+      dispatch(updateColor(color));
+      navigation.navigate('HomeScreen');
+    }
+    else{
+      const color: Color = {
+        id: Math.random(),
+        name: colorName,
+        code: hexCode,
+      }
+
+      add(color);
+      navigation.navigate('HomeScreen');
+    }
   }
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -174,6 +193,18 @@ const AddColorScreen = ( {navigation, route } ) => {
   );
 };
 
+
+const mapDispatchToProps = dispatch => {
+  console.log("Adding a value && Dispatch is Called");
+  return {
+    add: (color) => {
+      dispatch(addColor(color));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddColorScreen);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -217,8 +248,6 @@ const styles = StyleSheet.create({
     marginLeft: 50
   },
 });
-
-export default AddColorScreen;
 
 
  

@@ -16,10 +16,6 @@ const FlatG: FunctionComponent<Props> = (props) =>  {
   const navigation = useNavigation();
   const {colors} = props
   
- 
-  
-
-
  const moveitem = (item, index) => {
     navigation.navigate('AddColorScreen', {
      item : {
@@ -32,7 +28,6 @@ const FlatG: FunctionComponent<Props> = (props) =>  {
   });
  }
   
-
   return (    
 
     <FlatGrid

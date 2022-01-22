@@ -1,7 +1,16 @@
-declare type Color = {
+type Color = {
     id: number,
     name: string,
-    code: string,
+    code: string
 }
 
-declare type Colors = Array<Color>;
+type ColorState = {
+    colors: Color[]
+}
+
+type ColorAction = {
+    type: string
+    color: Color
+}
+type DispatchType = (args: ColorAction) => ColorAction
+type Colors = Array<Color>;
