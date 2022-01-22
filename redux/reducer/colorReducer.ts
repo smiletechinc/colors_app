@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux'
 import * as actionTypes from '../action/actionTypes'
 const initialState: ColorState = {
     colors: [  
@@ -17,7 +18,7 @@ const initialState: ColorState = {
       ]
 }
 
-const colorReducer = (state: ColorState = initialState, action: ColorAction): ColorState => {
+const colorReducer = (state: ColorState = initialState, action: AnyAction): ColorState => {
   // console.log('indise reducer.', JSON.stringify(action));
   switch(action.type) {
     case actionTypes.ADD_COLOR:

@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "github:react-native-community/async-storage",
     "@react-native-community/slider": "^4.1.12",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
@@ -21,6 +22,7 @@
     "react-native-super-grid": "^4.2.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1"
   },
