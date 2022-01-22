@@ -26,7 +26,7 @@ const AppTextInput:React.FunctionComponent<Input> = ( props ) => {
                 keyboardType = {keyboardType}
             />
         </View>
-        <Text style={{marginTop:-16, marginBottom:8}}>{error}</Text>
+        {error !='' && <Text style={{marginTop:-16, marginBottom:8}}>{error}</Text>}
     </View> 
     )
 }

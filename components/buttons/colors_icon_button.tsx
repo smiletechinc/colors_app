@@ -3,10 +3,11 @@ import { StyleSheet, TouchableOpacity, Image } from "react-native";
 
 type IconButtonProps = {
   onPress: any;
+  icon: string;
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ( props ) => {
-  const {onPress} = props;
+  const {onPress, icon} = props;
 
     return(
         <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.iconButtonContainer} >

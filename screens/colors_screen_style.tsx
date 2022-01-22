@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
     },
     sliderview: {
         alignItems: 'center', justifyContent: 'center',
-    }
+    },
+    listContainer: {
+        width: '100%'
+      }
 });
 export default styles  ;
