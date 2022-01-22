@@ -26,7 +26,7 @@ const AppTextInput:React.FunctionComponent<Input> = ( props ) => {
                 keyboardType = {keyboardType}
             />
         </View>
-        {error !='' && <Text style={{marginTop:-16, marginBottom:8}}>{error}</Text>}
+        {error !== '' && <Text style={styles.errorText}>{error}</Text>}
     </View> 
     )
 }
@@ -40,11 +40,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#98d3d3",
         borderRadius: 30,
         borderWidth: 1,
-        //borderColor: 'grey',
         width: "70%",
         height: 45,
         marginBottom: 20,
-        //alignItems: "Left",
       },
     
       TextInput: {
@@ -52,6 +50,9 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         marginLeft: 20,
+      },
+      errorText: {
+        marginLeft:-100, marginTop:-16, color:'red', marginBottom:16,
       },
 });
 

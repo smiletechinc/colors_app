@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
-//import all the components we are going to use
-import {View, Text, SafeAreaView, StyleSheet, TextInput, Alert, Button} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
-import { NavigationContainer } from '@react-navigation/native';
 import { PrimaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { connect } from 'react-redux';
 import { addColor, updateColor } from '../redux/action/color';
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
-
 const AddColorScreen = ( props ) => {
 
   const {navigation, route, add} = props;
@@ -60,7 +57,6 @@ const AddColorScreen = ( props ) => {
   useEffect(()=>{
     if(type && type == 'EditColor'){
       setColorName(route.params.item.name);  
-      //alert(route.params.item.code);
       setHexCode(route.params.item.code); 
       console.log(route.params.item.id);
       hex2rgba(route.params.item.code,1);
@@ -76,14 +72,11 @@ const AddColorScreen = ( props ) => {
 
   const colorBookmark = () => {
     if(type && type === "EditColor"){
-      console.log("editcolor action called");
-      console.log("editcolorid: ", route.params.item.id);
       const color: Color = {
         id: route.params.item.id,
         name: colorName,
         code: hexCode,
       }
-
       dispatch(updateColor(color));
       navigation.navigate('HomeScreen');
     }
@@ -93,7 +86,6 @@ const AddColorScreen = ( props ) => {
         name: colorName,
         code: hexCode,
       }
-
       add(color);
       navigation.navigate('HomeScreen');
     }

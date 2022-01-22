@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 type Props = {
@@ -8,10 +8,7 @@ type Props = {
 
 const ListItem: React.FunctionComponent<Props>= (props) => {
 const {color, onPress} = props;
-  useEffect(()=> {
-    console.log("List item props:", props);
-  });
-
+ 
     return (
         <TouchableOpacity onPress={onPress}>
         <View style={[styles.itemContainer, { backgroundColor: color.code }]}>
@@ -26,15 +23,12 @@ const {color, onPress} = props;
 export default ListItem;
 
 const styles = StyleSheet.create({
-    listItem: {
-      width: '100%',
-      padding: 10,
-      marginBottom: 10,
-      backgroundColor: '#eee'
-    },
     itemContainer: {
+      borderStyle: "solid",
       justifyContent: 'flex-end',
       borderRadius: 5,
+      marginLeft: 32,
+      marginTop: 8,
       padding: 10,
       height: 150,
     },
