@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from "react-native";
 
 type IconButtonProps = {
   onPress: any;
-  icon: string;
+  icon: ImageSourcePropType;
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ( props ) => {
@@ -11,7 +11,7 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ( props ) => {
 
     return(
         <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.iconButtonContainer} >
-          <Image source={require('../../resources/images/icon_plus.png')}
+          <Image source={icon}
                  style={styles.icon} /> 
         </TouchableOpacity>
     )

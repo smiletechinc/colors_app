@@ -12,6 +12,7 @@ import { connect, useDispatch } from 'react-redux';
 import { addColor } from '../redux/action/color';
 import ListItem from '../components/grid/list_item';
 import {useTypedSelector} from './../redux/states'
+const PlusIcon = require("../resources/images/icon_plus.png");
 
 type Props = {
   navigation: any;
@@ -115,7 +116,7 @@ const renderItem = ({item}) => {
        renderItem = {renderItem}
      />
    
-        <IconButton onPress={SampleFunction} icon={'./../resources/images/icon_plus'} />
+        <IconButton onPress={SampleFunction} icon={PlusIcon} />
       </View>
       </View>
   );
