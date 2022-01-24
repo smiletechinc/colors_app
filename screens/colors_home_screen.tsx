@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import { IconButton } from '../components/buttons';
 import {styles} from './index';
 import { connect, useDispatch } from 'react-redux';
-import ListItem from '../components/grid/list_item';
+import { ListItem } from '../components/grid/index';
 
 const PlusIcon = require("../resources/images/icon_plus.png");
 

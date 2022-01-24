@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { addColor, updateColor } from '../redux/action/color';
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
+
 const AddColorScreen = ( props ) => {
 
   const {navigation, route, add} = props;

@@ -1,5 +1,7 @@
-import FlatG from "./grid";
+import ListItem from "./list_item"
+import styles from './grid_style'
 
 export {
-    FlatG,
+    ListItem,
+    styles
 }
