@@ -1,3 +1,4 @@
+import { act } from 'react-test-renderer'
 import { AnyAction } from 'redux'
 import * as actionTypes from '../action/actionTypes'
 const initialState: ColorState = {
@@ -38,6 +39,14 @@ const colorReducer = (state: ColorState = initialState, action: AnyAction): Colo
         ...state,
         colors: colors,
       };
+      case actionTypes.DELETE_COLOR:
+        const deleteCo: Color[] = state.colors.filter(
+          color=> color.id != action.color.id
+        )
+        return {
+          ...state,
+          colors: deleteCo,
+        }
     default:
       return state;
   }

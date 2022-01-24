@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
-import { PrimaryButton } from '../components/buttons';
+import { PrimaryButton, SecondaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { connect } from 'react-redux';
-import { addColor, updateColor } from '../redux/action/color';
+import { addColor, deleteColor, updateColor } from '../redux/action/color';
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
 
@@ -90,6 +90,16 @@ const AddColorScreen = ( props ) => {
       add(color);
       navigation.navigate('HomeScreen');
     }
+  }
+
+  const DeleteColor = () => {
+    const color: Color = {
+      id: route.params.item.id,
+      name: colorName,
+      code: hexCode,
+    }
+    dispatch(deleteColor(color));
+    navigation.navigate('HomeScreen');
   }
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -180,7 +190,10 @@ const AddColorScreen = ( props ) => {
           title={type && type === "EditColor" ? "Update Color" : "Add Color"}
          onPress={colorBookmark}
        />
-
+       {type && type === "EditColor" && <SecondaryButton 
+          title={"Delete Color"}
+         onPress={DeleteColor}
+       />}
       </View>
     </SafeAreaView>
   );
