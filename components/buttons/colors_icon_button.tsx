@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from "react-native";
+import { styles } from './index';
 
 type IconButtonProps = {
   onPress: any;
-  icon: string;
+  icon: ImageSourcePropType;
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ( props ) => {
@@ -11,29 +12,10 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ( props ) => {
 
     return(
         <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.iconButtonContainer} >
-          <Image source={require('../../resources/images/icon_plus.png')}
+          <Image source={icon}
                  style={styles.icon} /> 
         </TouchableOpacity>
     )
 }
-
-const styles = StyleSheet.create({
-    iconButtonContainer:{
-        position: 'absolute',
-        width: 48,
-        height: 48,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 32,
-        bottom: 32,
-        backgroundColor: '#009688',
-        borderRadius: 25,
-      },
-      icon: {
-        resizeMode: 'cover',
-        width: 24,
-        height: 24,
-      }
-});
 
 export default IconButton;

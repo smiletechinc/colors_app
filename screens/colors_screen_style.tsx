@@ -7,6 +7,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#31A8A8',
     },
+    flatcontainer: {
+        backgroundColor: '#31A8A8',
+        flex: 2,
+    },
     activityIndicator: {
         alignItems: 'center',
         height: 80,
@@ -33,7 +37,9 @@ const styles = StyleSheet.create({
         alignItems: 'center', justifyContent: 'center',
     },
     listContainer: {
-        width: '100%'
+        width: '100%',
+        paddingleft: 64,
       }
 });
+
 export default styles  ;

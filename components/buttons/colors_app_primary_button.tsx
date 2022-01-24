@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import {styles} from './index';
 
 type PrimaryButtonProps = {
   title: string;
@@ -11,24 +12,11 @@ const PrimaryButton:React.FunctionComponent<PrimaryButtonProps>  = (props ) => {
      <View>
         <TouchableOpacity onPress={onPress}>
             <View style={styles.primaryButtonContainer}>
-                <Text style={{color: "#000000"}}>{title}</Text>
+                <Text style={styles.secondaryButtonText}>{title}</Text>
             </View>
         </TouchableOpacity> 
     </View> 
     )
 }
-
-const styles = StyleSheet.create({
-  primaryButtonContainer: {
-    width: "70%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#009688",
-    marginLeft:50,
-  },
-});
 
 export default PrimaryButton;

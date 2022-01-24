@@ -1,9 +1,5 @@
-import * as React from 'react'; //import react components
-import RootNavigator from './navigators/colors_root_navigator'; //import rootnavigator component from file
-// import store from './redux/store';
-// import {Provider} from 'react-redux';
-
-// or any pure javascript modules available in npm
+import * as React from 'react'; 
+import RootNavigator from './navigators/colors_root_navigator'; 
 import { Card } from 'react-native-paper';
 
 export default function App() {

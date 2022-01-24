@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux'
 import * as actionTypes from '../action/actionTypes'
 const initialState: ColorState = {
     colors: [  
@@ -17,12 +18,9 @@ const initialState: ColorState = {
       ]
 }
 
-const colorReducer = (state: ColorState = initialState, action: ColorAction): ColorState => {
-  // console.log('indise reducer.', JSON.stringify(action));
+const colorReducer = (state: ColorState = initialState, action: AnyAction): ColorState => {
   switch(action.type) {
     case actionTypes.ADD_COLOR:
-      console.log('Adding color.', action)
-      console.log(action.color.id)
         const newColor: Color = {
             id: action.color.id,
             name: action.color.name,
@@ -33,16 +31,9 @@ const colorReducer = (state: ColorState = initialState, action: ColorAction): Co
         colors: state.colors.concat(newColor)
       };
     case actionTypes.UPDATE_COLOR:
-      console.log('Updating colors:', JSON.stringify(state.colors));
-      console.log('Updated color:', JSON.stringify(action.color));
-      // const updatedColors: Colors = state.colors.filter(
-      //   color =>color.id === action.newColor.id
-      // )
       const objIndex = state.colors.findIndex((colors => colors.id == action.color.id));
-console.log('index: ', objIndex);
-let colors = state.colors;
-colors[objIndex] = action.color;
-console.log('Updated colors:', JSON.stringify(colors));
+      let colors = state.colors;
+      colors[objIndex] = action.color;
       return {
         ...state,
         colors: colors,

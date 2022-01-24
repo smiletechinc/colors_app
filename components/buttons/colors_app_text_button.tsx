@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import {styles} from './index';
+
 
 type ButtonProps = {
 title: string;
@@ -13,22 +15,5 @@ const TextButton:React.FunctionComponent<ButtonProps>  = (props) => {
         <Button title={title} onPress={onPress} /> 
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-         alignItems: 'center', justifyContent: 'center',
-        backgroundColor: '#31A8A8',
-      },
-loginBtn: {
-    width: "70%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#009688",
-    marginLeft:50,
-  },
-});
 
 export default TextButton;

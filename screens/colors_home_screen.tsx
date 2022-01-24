@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, FlatList, StyleSheet, Button, Alert, TouchableOpacity, Image} from 'react-native';
+import { View, FlatList } from 'react-native';
 import { IconButton } from '../components/buttons';
-import {NavigationContainer} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { FlatG } from '../components/grid';
-import AddColorScreen from './colors_add_color_screen';
-import { FlatGrid } from 'react-native-super-grid';
-import {dummyColors} from '../resources/dummy_data/dummy_colors';
 import {styles} from './index';
 import { connect, useDispatch } from 'react-redux';
-import { addColor } from '../redux/action/color';
-import ListItem from '../components/grid/list_item';
-import {useTypedSelector} from './../redux/states'
+import { ListItem } from '../components/grid/index';
+
+const PlusIcon = require("../resources/images/icon_plus.png");
 
 type Props = {
   navigation: any;
@@ -30,39 +24,10 @@ const HomeScreen: React.FunctionComponent<Props> = (props) => {
   const [updatingColors, setUpdatingColors] = useState<boolean>(false);
   const [selectedID, setSelectedID] = useState();
 
-  // const routingLoaded = useTypedSelector(state => state.routing.colors);
-
   useEffect(() => {
     setColors(reduxColors);
     updatedOuter = updated;
   }, [updated, reduxColors]);
-
-  // useEffect(()=>{
-  //   console.log("routeParams: ", route.params);
-  // }, [route.params]);
-
-//   useEffect(() => {
-//     setUpdatingColors(true);
-//     if(route.params) {
-//       const { color, colorIndex } = route.params;
-//       console.log('Params: ',  route.params);
-//      // let tempColors = colors;
-//       console.log('Color index:', colorIndex);
-//       if (colorIndex) {
-//         console.log('First')
-//         tempColors[colorIndex] = color;
-//       } else {
-//         tempColors.push(color);
-//       }
-//       setColors(tempColors);
-//     }
-// setUpdatingColors(false);
-//   }, [route.params]);
-
-//   useEffect(() => {
-//     console.log('Colors Updated');
-//   }, [colors]);
-
   const SampleFunction=()=>{
     navigation.navigate('AddColorScreen');
 }
@@ -105,19 +70,19 @@ const renderItem = ({item}) => {
   }
 }
   return (
-    <View style={styles.container}>
+    <View style={styles.flatcontainer}>
       <View>
         {/* <FlatG colors={colors}/> */}
         <FlatList style = { styles.listContainer }
        data = { colors }
        keyExtractor={(item, index) => index.toString()}
        extraData={selectedID}
+       numColumns={2}
        renderItem = {renderItem}
      />
-   
-        <IconButton onPress={SampleFunction} icon={'./../resources/images/icon_plus'} />
+        <IconButton onPress={SampleFunction} icon={PlusIcon} />
       </View>
-      </View>
+    </View>
   );
 }
 

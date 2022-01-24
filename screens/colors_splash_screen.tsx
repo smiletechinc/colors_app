@@ -10,7 +10,6 @@ const SplashScreen = ({navigation}) => {
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
-    
     setTimeout(() => {
       setAnimating(true);
       navigation.replace('LandingScreen');
