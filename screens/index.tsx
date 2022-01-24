@@ -5,6 +5,7 @@ import LoginScreen from "./colors_login_screen";
 import SignupScreen from "./colors_signup_screen";
 import SplashScreen from "./colors_splash_screen";
 import styles from "./colors_screen_style";
+import ForgetScreen from "./colors_forget_password_screen";
 
 export {
     AddColorScreen,
@@ -13,5 +14,6 @@ export {
     LoginScreen,
     SignupScreen,
     SplashScreen,
+    ForgetScreen,
     styles
 }

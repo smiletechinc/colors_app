@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LogImage from '../components/image_containers/LogImage';
@@ -7,6 +7,7 @@ import AppTextInput from '../components/inputs/colors_app_textinput';
 import { PrimaryButton, } from '../components/buttons'
 import { useEffect } from 'react';
 import styles from './colors_screen_style';
+import { signUpService, registerUserService } from './../services/authenticationServices';
 
 const SignupScreen = ({ navigation }) => {
 
@@ -44,9 +45,58 @@ const SignupScreen = ({ navigation }) => {
     } else if(password != confirmpassword) {
       alert('Password does not match with Confirm Password');
     } else{
-      navigation.replace('LoginScreen');
+        proceedToSignup();
     }
   }
+
+const goToLoginSceen = () => {
+  navigation.navigate('LoginScreen');
+}
+
+const registrationSuccess = () => {
+  Alert.alert("Trainify", `You've signed up successfully.`)
+  goToLoginSceen();
+}
+
+const authenticationSuccess = (user?:any) => {
+  console.log("Signup: ", JSON.stringify(user));
+  if (user) {
+    proceedToRegister(user);
+  }
+}
+
+const proceedToRegister = (user) => {
+  const id = user.uid;
+  const userObject:UserObject = {
+    id,
+    email,
+    name,
+  }
+
+  registerUserService(userObject,registrationSuccess,authenticationFailure);
+}
+
+const authenticationFailure = (error) => {
+  if(error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    Alert.alert("Trainify", errorMessage)
+  }
+}
+
+const proceedToSignup = () => {
+ // 1. check if user exists in database : authentication modue
+ // 2. create account
+ // 3. Create user in database : real time database
+
+  const authObject = {
+    email,
+    password,
+  }
+  signUpService(authObject, authenticationSuccess, authenticationFailure ); // Async function
+
+}
+
   const log = () =>{
     navigation.replace('LoginScreen');
   }
