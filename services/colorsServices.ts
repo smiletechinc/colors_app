@@ -28,7 +28,6 @@ export const fetchColorsService = (onSuccess?:any, onFailure?:any) => {
   const branch = 'colors';
   console.log('Branch: ', branch)
   if (db) {
-    const dbRef = ref(getDatabase());
     get(ref(db, branch)).then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
@@ -51,4 +50,9 @@ export const fetchColorsService = (onSuccess?:any, onFailure?:any) => {
   }
   onFailure(error);
 }
+}
+
+export const getIdForNewColor = () => {
+  const dbRef = ref(getDatabase());
+  return dbRef.key;
 }
