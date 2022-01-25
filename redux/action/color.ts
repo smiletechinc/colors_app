@@ -14,3 +14,10 @@ export const updateColor = (color: Color) => {
     color,
   }
 }
+
+export const deleteColor = (color: Color) => {
+  return {
+    type: actionTypes.DELETE_COLOR,
+    color,
+  }
+}

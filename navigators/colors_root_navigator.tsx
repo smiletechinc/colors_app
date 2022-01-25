@@ -9,6 +9,7 @@ import {LoginScreen} from '../screens';
 import {SignupScreen} from '../screens';
 import {HomeScreen} from '../screens';
 import {AddColorScreen} from '../screens';
+import {ForgetScreen} from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function RootNavigator() {
         <Stack.Screen name="SignupScreen" component={SignupScreen} options={{title: "", header: ()=>null}}/>
         <Stack.Screen name="HomeScreen" component={HomeScreen}  options={{title: "Home"}}/>
         <Stack.Screen name="AddColorScreen" component={AddColorScreen} options={{title:"Add Color"}}/>
+        <Stack.Screen name="ForgetScreen" component={ForgetScreen} options={{title: "Forget Password"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

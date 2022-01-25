@@ -7,46 +7,32 @@ import { PrimaryButton, TextButton } from '../components/buttons'
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { useEffect } from 'react';
 import { styles } from './index';
-import { signInService, registerUserService } from './../services/authenticationServices';
-import ForgetScreen from './colors_forget_password_screen';
+import { resetPasswordService} from './../services/authenticationServices';
 
-const LoginScreen = ({ navigation }) => {
+const ForgetScreen = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
-  const [password, setPaswword] = useState('');
-  const [isFoucsed, setISFoucsed] = useState(true);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
   const [emailErrorDisc, setEmailErroDisc] = useState('');
   
   useEffect(() => {
     setEmailErroDisc('');
-    setPasswordError('');
-      }, [email,password]);
+      }, [email]);
 
   const login = () => {
       if(email.trim().length==0){
         setEmailErroDisc('Please Enter Email');
       }
-      else if(password.trim().length == 0){
-          setPasswordError('Please Enter Password');
-      }
       else{
-        proceedToLogin()
+        proceedToForgetPassword()
       }
   }
   const register = () => {
-    navigation.navigate('SignupScreen')
-  }
-
-  const forgotpa = () => {
-    navigation.navigate('ForgetScreen')
+    navigation.navigate('LoginScreen')
   }
   const authenticationSuccess = (user?:any) => {
     console.log("SignIn: ", JSON.stringify(user));
     if (user) {
-      Alert.alert("Login Succesfull")
-      navigation.replace('HomeScreen');
+      Alert.alert("password reset email will be send on your email")
     }
   }
 
@@ -58,16 +44,13 @@ const LoginScreen = ({ navigation }) => {
     }
   }
 
-  const proceedToLogin = () => {
+  const proceedToForgetPassword = () => {
     // 1. check if user exists in database : authentication modue
     // 2. create account
     // 3. Create user in database : real time database
     console.log("proceedtologin function called")
-     const authObject = {
-       email,
-       password,
-     }
-     signInService(authObject, authenticationSuccess, authenticationFailure ); // Async function
+
+     resetPasswordService(email, authenticationSuccess, authenticationFailure ); // Async function
    
    }
 
@@ -78,17 +61,13 @@ const LoginScreen = ({ navigation }) => {
       <View>
         <AppTextInput placeholder="Enter Email" onChangeText={text => setEmail(text)} defaultValue={email} error={emailErrorDisc} />
       </View>
-        <AppTextInput placeholder="Enter Password" onChangeText={text => setPaswword(text)} secureTextEntry={true} defaultValue={password} error={passwordError}/>
-        <PrimaryButton title='Login' onPress={login} />
+        <PrimaryButton title='ForgetPassword' onPress={login} />
+      <Text style={styles.loginText}>Remember Password</Text>
       <View>
-        <TextButton title='Forgot Password' onPress={forgotpa} /> 
-      </View>
-      <Text style={styles.loginText}>If you have not register, then click on</Text>
-      <View>
-        <PrimaryButton title='Register' onPress={register} />
+        <PrimaryButton title='Login' onPress={register} />
       </View>
     </View>
   );
 }
 
-export default LoginScreen;
+export default ForgetScreen;
