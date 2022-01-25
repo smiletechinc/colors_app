@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
-import {styles} from './index';
-
 
 type ButtonProps = {
 title: string;
