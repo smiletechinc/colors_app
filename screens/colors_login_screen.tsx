@@ -44,9 +44,10 @@ const LoginScreen = ({ navigation }) => {
   }
   const authenticationSuccess = (user?:any) => {
     console.log("SignIn: ", JSON.stringify(user));
+    console.log("userid:", user.uid);
     if (user) {
       Alert.alert("Login Succesfull")
-      navigation.replace('HomeScreen');
+      navigation.replace('HomeScreen', user.uid);
     }
   }
 

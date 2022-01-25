@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet, Alert} from 'react-native';
 import Slider from '@react-native-community/slider';
 import { PrimaryButton, SecondaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { addColor, deleteColor, updateColor } from '../redux/action/color';
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
+import { addColorService, registerUserService } from './../services/authenticationServices';
 
 const AddColorScreen = ( props ) => {
 
@@ -19,7 +20,8 @@ const AddColorScreen = ( props ) => {
   const [colorName, setColorName] = useState('');
   const [errorV, setErrorV] = useState('');
   const [type, setType] = useState(route && route.params && route.params.type)
-  
+  const [createdID, setCreatedID] = useState('');
+
   const convertSingleCode = ( colorCode ) => { 
     let tempHexCode = colorCode.toString(16); 
     return (tempHexCode.length == 1) ? ('0' + tempHexCode) : tempHexCode; 
@@ -63,6 +65,7 @@ const AddColorScreen = ( props ) => {
       hex2rgba(route.params.item.code,1);
     }
     else{
+      setCreatedID(route.params);
       setColorName('');
     }
   }, [route && route.params]);
@@ -71,29 +74,80 @@ const AddColorScreen = ( props ) => {
     updateHexValue();
   }, [redSlider, greenSlider, blueSlider]);
 
+  const goToHomeSceen = () => {
+    navigation.navigate('HomeScreen');
+  }
+
+  const authenticationSuccess = (user?:any) => {
+    console.log("Signup: ", JSON.stringify(user));
+    if (user) {
+      Alert.alert("Trainify", `You've signed up successfully.`)
+      goToHomeSceen();
+    }
+  }
+  
+  // const proceedToRegister = (user) => {
+  //   const id = user.uid;
+  //   const userObject:UserObject = {
+  //     id,
+  //     email,
+  //     name,
+  //   }
+  
+  //   registerUserService(userObject,registrationSuccess,authenticationFailure);
+  // }
+  
+  const authenticationFailure = (error) => {
+    if(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      Alert.alert("Trainify", errorMessage)
+    }
+  }
+  
+  const proceedToAddColor = () => {
+   // 1. check if user exists in database : authentication modue
+   // 2. create account
+   // 3. Create user in database : real time database
+  
+   //const id = user.uid;
+
+   const color: Color = {
+     createdBy:createdID,
+    id: Math.floor(Math.random()*10),
+    name: colorName,
+    code: hexCode,
+  }
+    addColorService(color, authenticationSuccess, authenticationFailure ); // Async function
+  
+  }
+
   const colorBookmark = () => {
     if(type && type === "EditColor"){
       const color: Color = {
+        createdBy: 'null',
         id: route.params.item.id,
         name: colorName,
         code: hexCode,
       }
       dispatch(updateColor(color));
-      navigation.navigate('HomeScreen');
+      // navigation.navigate('HomeScreen');
     }
     else{
-      const color: Color = {
-        id: Math.random(),
-        name: colorName,
-        code: hexCode,
-      }
-      add(color);
+      proceedToAddColor();
+      // const color: Color = {
+      //   id: Math.random(),
+      //   name: colorName,
+      //   code: hexCode,
+      // }
+      // add(color);
       navigation.navigate('HomeScreen');
     }
   }
 
   const DeleteColor = () => {
     const color: Color = {
+      createdBy: 'null',
       id: route.params.item.id,
       name: colorName,
       code: hexCode,
