@@ -4,6 +4,7 @@ import { IconButton } from '../components/buttons';
 import {styles} from './index';
 import { connect, useDispatch } from 'react-redux';
 import { ListItem } from '../components/grid/index';
+import { fetchColorsService, addColorService} from './../services/colorsServices';
 
 const PlusIcon = require("../resources/images/icon_plus.png");
 
@@ -23,6 +24,18 @@ const HomeScreen: React.FunctionComponent<Props> = (props) => {
   const [colors, setColors] = useState(reduxColors);
   const [updatingColors, setUpdatingColors] = useState<boolean>(false);
   const [selectedID, setSelectedID] = useState();
+
+  const fetchColorsSuccess = (colorsData) => {
+    console.log('colorsData: ', colorsData);
+  }
+
+  const fetchColorsSuccessFailure = (colorsError) => {
+    console.log('colorsError: ', colorsError);
+  }
+
+useEffect(() => {
+fetchColorsService(fetchColorsSuccess, fetchColorsSuccessFailure)
+})
 
   useEffect(() => {
     setColors(reduxColors);
