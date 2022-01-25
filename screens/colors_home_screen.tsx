@@ -18,7 +18,6 @@ let updatedOuter = false;
 
 const HomeScreen: React.FunctionComponent<Props> = (props) => {
   const {navigation, route, reduxColors, updated} = props;
-  
   const [isFetching, setIsFetching] = useState(false);
   const [colors, setColors] = useState(reduxColors);
   const [updatingColors, setUpdatingColors] = useState<boolean>(false);
@@ -28,8 +27,9 @@ const HomeScreen: React.FunctionComponent<Props> = (props) => {
     setColors(reduxColors);
     updatedOuter = updated;
   }, [updated, reduxColors]);
+
   const SampleFunction=()=>{
-    navigation.navigate('AddColorScreen');
+    navigation.navigate('AddColorScreen', route.params );
 }
  
 const moveitem = (item) => {
@@ -42,6 +42,7 @@ const moveitem = (item) => {
    name: item.name,
    code: item.code,
  },
+ createdBy: route.params,
  options:{title:"Edit Color"},
  type:"EditColor",
 });

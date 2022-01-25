@@ -93,3 +93,25 @@ export const registerUserService = (userObject:UserObject, onSuccess?:any, onFai
             onFailure(error);
         }
 }
+
+export const addColorService = (color:Color, onSuccess?:any, onFailure?:any) => {
+  const branch = `/colors/${color.id}`
+  console.log('Branch: ', branch)
+  if (db) {
+      set(ref(db, branch), color)
+      .then(() => {
+      // Signed in
+      onSuccess();
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      onFailure(error);
+    });
+      } else {
+          const error:ErrorObject = {
+              message: 'Something went wrong while executing your request'
+          }
+          onFailure(error);
+      }
+}
