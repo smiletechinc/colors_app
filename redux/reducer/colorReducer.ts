@@ -37,6 +37,8 @@ const colorReducer = (state: ColorState = initialState, action: AnyAction): Colo
         colors: state.colors.concat(newColor)
       };
     case actionTypes.UPDATE_COLOR:
+      console.log("updateCOlor reducer called");
+
       const objIndex = state.colors.findIndex((colors => colors.id == action.color.id));
       let colors = state.colors;
       colors[objIndex] = action.color;
@@ -44,6 +46,12 @@ const colorReducer = (state: ColorState = initialState, action: AnyAction): Colo
         ...state,
         colors: colors,
       };
+      case actionTypes.UPDATE_COLORS:
+        console.log("updateCOlor reducer called", action.colors);
+        return {
+          ...state,
+          colors: action.colors,
+        };
       case actionTypes.DELETE_COLOR:
         const deleteCo: Color[] = state.colors.filter(
           color=> color.id != action.color.id

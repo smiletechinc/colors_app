@@ -65,7 +65,7 @@ const AddColorScreen = ( props ) => {
       hex2rgba(route.params.item.code,1);
     }
     else{
-      setCreatedID(route.params);
+      setCreatedID('dfgh');
       setColorName('');
     }
   }, [route && route.params]);
@@ -114,7 +114,7 @@ const AddColorScreen = ( props ) => {
    const keygenrator = getIdForNewColor();
    console.log("keygenerator:", keygenrator);
    const color: Color = {
-     createdBy:createdID,
+    createdBy:createdID,
     id: Math.floor(Math.random()*10),
     name: colorName,
     code: hexCode,
@@ -136,12 +136,12 @@ const AddColorScreen = ( props ) => {
     }
     else{
       proceedToAddColor();
-      // const color: Color = {
-      //   id: Math.random(),
-      //   name: colorName,
-      //   code: hexCode,
-      // }
-      // add(color);
+      const color: Color = {
+        id: Math.random(),
+        name: colorName,
+        code: hexCode,
+      }
+      add(color);
       navigation.navigate('HomeScreen');
     }
   }

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   marginTop: 8,
   padding: 10,
   height: 150,
+  width: 150
   },
   itemName: {
   fontSize: 16,
