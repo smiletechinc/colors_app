@@ -5,9 +5,11 @@ import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import userReducer  from '../redux/reducer/userReducer';
 
 const rootReducer = combineReducers({
-  colors: colorReducer
+  colors: colorReducer,
+  userlogin: userReducer
 });
 
 const persistConfig = {

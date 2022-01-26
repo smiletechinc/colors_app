@@ -1,17 +1,21 @@
 import { act } from 'react-test-renderer'
 import { AnyAction } from 'redux'
 import * as actionTypes from '../action/actionTypes'
+
 const initialState: ColorState = {
     colors: [  
-        {   id: Math.random(),
+        {   createdBy: 'null',
+            id: Math.random(),
             name: "TURQUOISE", 
             code: "#1abc9c" 
         },
-        {   id: Math.random(),
+        {  createdBy: 'null', 
+           id: Math.random(),
             name: "EMERALD", 
             code: "#2ecc71" 
         },
         {
+          createdBy: 'null',
           id: Math.random(),
             name: "ASBESTOS", 
             code: "#7f8c8d" 
@@ -23,6 +27,7 @@ const colorReducer = (state: ColorState = initialState, action: AnyAction): Colo
   switch(action.type) {
     case actionTypes.ADD_COLOR:
         const newColor: Color = {
+            createdBy: action.color.createdBy,
             id: action.color.id,
             name: action.color.name,
             code: action.color.code

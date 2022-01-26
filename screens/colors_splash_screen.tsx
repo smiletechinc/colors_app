@@ -4,15 +4,27 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LogoImage from '../components/image_containers/LogoImage';
 import { styles } from './index';
+import { connect, useDispatch } from 'react-redux';
 
-const SplashScreen = ({navigation}) => {
+type Props = {
+  navigation:any
+  userAuthentication: any,
+}
+
+const SplashScreen: React.FunctionComponent<Props> = (props) => {
   
+  const {navigation, userAuthentication} = props;
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setAnimating(true);
-      navigation.replace('LandingScreen');
+      if(userAuthentication){
+        navigation.replace('HomeScreen');
+      }
+      else {
+        navigation.replace('LandingScreen');
+      }
     }, 5000);
   }, []);
 
@@ -31,4 +43,13 @@ const SplashScreen = ({navigation}) => {
   );
 };
 
-export default SplashScreen;
+const mapStateToProps = state => {
+  console.log("Redux user props are comes:", JSON.stringify(state.userlogin.userAuthenticate));
+  return {
+    userAuthentication: state.userlogin.userAuthenticate
+  }
+}
+
+export default connect(mapStateToProps)(SplashScreen);
+
+// export default SplashScreen;

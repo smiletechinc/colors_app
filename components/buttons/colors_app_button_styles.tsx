@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#009688',
         borderRadius: 25,
     },
-      icon: {
+    icon: {
         resizeMode: 'cover',
         width: 24,
         height: 24,

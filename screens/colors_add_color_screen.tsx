@@ -4,10 +4,10 @@ import Slider from '@react-native-community/slider';
 import { PrimaryButton, SecondaryButton } from '../components/buttons';
 import AppTextInput from '../components/inputs/colors_app_textinput';
 import { connect } from 'react-redux';
-import { addColor, deleteColor, updateColor } from '../redux/action/color';
+import { addColor, deleteColor, updateColor } from '../redux/action/colorAction';
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
-import { addColorService, registerUserService } from './../services/authenticationServices';
+import { addColorService, getIdForNewColor } from './../services/colorsServices';
 
 const AddColorScreen = ( props ) => {
 
@@ -111,7 +111,8 @@ const AddColorScreen = ( props ) => {
    // 3. Create user in database : real time database
   
    //const id = user.uid;
-
+   const keygenrator = getIdForNewColor();
+   console.log("keygenerator:", keygenrator);
    const color: Color = {
      createdBy:createdID,
     id: Math.floor(Math.random()*10),
