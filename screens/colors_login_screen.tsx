@@ -9,9 +9,14 @@ import { useEffect } from 'react';
 import { styles } from './index';
 import { signInService, registerUserService } from './../services/authenticationServices';
 import ForgetScreen from './colors_forget_password_screen';
+import { connect } from 'react-redux';
+import { userstatus } from '../redux/action/userAction';
+import { Dispatch } from "redux"
+import { useDispatch } from "react-redux"
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = (props) => {
 
+  const {navigation, route, add} = props;
   const [email, setEmail] = useState('');
   const [password, setPaswword] = useState('');
   const [isFoucsed, setISFoucsed] = useState(true);
@@ -43,10 +48,15 @@ const LoginScreen = ({ navigation }) => {
     navigation.navigate('ForgetScreen')
   }
   const authenticationSuccess = (user?:any) => {
-    console.log("SignIn: ", JSON.stringify(user));
-    console.log("userid:", user.uid);
+    console.log("SignIn: ", JSON.stringify(user));  
     if (user) {
       Alert.alert("Login Succesfull")
+      const userAuth: UserObject = {
+          id: user.uid,
+          email: email,
+          name: email
+        }
+        add(userAuth);
       navigation.replace('HomeScreen', user.uid);
     }
   }
@@ -92,4 +102,14 @@ const LoginScreen = ({ navigation }) => {
   );
 }
 
-export default LoginScreen;
+const mapDispatchToProps = dispatch => {
+  console.log("Adding a value && Dispatch is Called");
+  return {
+    add: (usero) => {
+      dispatch(userstatus(usero));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginScreen);
+// export default LoginScreen;

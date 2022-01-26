@@ -1,7 +1,8 @@
 type Color = {
     id: number,
     name: string,
-    code: string
+    code: string,
+    createdBy: string,
 }
 
 type ColorState = {
@@ -23,9 +24,19 @@ type UserObject = {
     name:string;
 }
 
+type UserState = {
+    authUser: UserObject
+}
+
+type UserAction = {
+    type: string,
+    authUser: UserObject
+}
+
 type ErrorObject = {
     code?: string;
     message: string, 
 }
+
 type DispatchType = (args: ColorAction) => ColorAction
 type Colors = Array<Color>;
