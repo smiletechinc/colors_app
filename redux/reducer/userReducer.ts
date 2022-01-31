@@ -4,7 +4,7 @@ import { AnyAction } from 'redux'
 import * as actionTypes from '../action/actionTypes'
 
 const initialState: UserState = {
-    userAuthenticate:  
+    authUser:  
         {   
             id: "null",
             email: "null", 
@@ -23,7 +23,7 @@ const userReducer = (state: UserState = initialState, action: AnyAction): UserSt
             }
           return {
             ...state,
-            userAuthenticate: newUser
+            authUser: newUser
           };
         default: {
             return state

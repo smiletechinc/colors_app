@@ -77,7 +77,7 @@ export const registerUserService = (userObject:UserObject, onSuccess?:any, onFai
     console.log('Branch: ', branch)
     if (db) {
         set(ref(db, branch), userObject)
-        .then(() => {
+        .then((data) => {
         // Signed in
         onSuccess();
       })

@@ -23,6 +23,7 @@ const SplashScreen: React.FunctionComponent<Props> = (props) => {
     const fetchColorsSuccessFailure = (colorsError) => {
     console.log('colorsError: ', colorsError);
     updateReduxColors([]);
+    navigation.replace('HomeScreen');
 
   }
 

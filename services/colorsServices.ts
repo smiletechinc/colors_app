@@ -23,6 +23,27 @@ export const addColorService = (color:Color, onSuccess?:any, onFailure?:any) => 
     onFailure(error);
   }
 }
+export const deleteColorService = (id:number, onSuccess?:any, onFailure?:any) => {
+  const branch = `/colors/${id}`
+  console.log('Branch: ', branch)
+  if (db) {
+      set(ref(db, branch), null)
+      .then(() => {
+      // Signed in
+      onSuccess();
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      onFailure(error);
+    });
+  } else {
+    const error:ErrorObject = {
+    message: 'Something went wrong while executing your request'
+  }
+  onFailure(error);
+}
+}
 
 export const fetchColorsService = (onSuccess?:any, onFailure?:any) => {
   const branch = 'colors';
@@ -30,7 +51,7 @@ export const fetchColorsService = (onSuccess?:any, onFailure?:any) => {
   if (db) {
     get(ref(db, branch)).then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
+        console.log('snapshot', snapshot);
         onSuccess(snapshot.val());
       } else {
         console.log("No data available");

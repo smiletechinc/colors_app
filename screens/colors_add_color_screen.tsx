@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { addColor, deleteColor, updateColor } from '../redux/action/colorAction';
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
-import { addColorService, getIdForNewColor } from './../services/colorsServices';
+import { addColorService, deleteColorService,  getIdForNewColor } from './../services/colorsServices';
 
 const AddColorScreen = ( props ) => {
 
@@ -21,6 +21,7 @@ const AddColorScreen = ( props ) => {
   const [errorV, setErrorV] = useState('');
   const [type, setType] = useState(route && route.params && route.params.type)
   const [createdID, setCreatedID] = useState('');
+  const [colorID, setCOlorID] = useState(0);
 
   const convertSingleCode = ( colorCode ) => { 
     let tempHexCode = colorCode.toString(16); 
@@ -86,17 +87,6 @@ const AddColorScreen = ( props ) => {
     }
   }
   
-  // const proceedToRegister = (user) => {
-  //   const id = user.uid;
-  //   const userObject:UserObject = {
-  //     id,
-  //     email,
-  //     name,
-  //   }
-  
-  //   registerUserService(userObject,registrationSuccess,authenticationFailure);
-  // }
-  
   const authenticationFailure = (error) => {
     if(error) {
       const errorCode = error.code;
@@ -106,22 +96,31 @@ const AddColorScreen = ( props ) => {
   }
   
   const proceedToAddColor = () => {
-   // 1. check if user exists in database : authentication modue
-   // 2. create account
-   // 3. Create user in database : real time database
   
-   //const id = user.uid;
    const keygenrator = getIdForNewColor();
    console.log("keygenerator:", keygenrator);
    const color: Color = {
     createdBy:createdID,
-    id: Math.floor(Math.random()*10),
+    id: colorID,
     name: colorName,
     code: hexCode,
   }
     addColorService(color, authenticationSuccess, authenticationFailure ); // Async function
   
   }
+  const proceedToDeleteColor = () => {
+  
+    const keygenrator = getIdForNewColor();
+    console.log("keygenerator:", keygenrator);
+    const color: Color = {
+     createdBy:createdID,
+     id: colorID,
+     name: colorName,
+     code: hexCode,
+   }
+   deleteColorService(route.params.item.id, authenticationSuccess, authenticationFailure ); // Async function
+   
+   }
 
   const colorBookmark = () => {
     if(type && type === "EditColor"){
@@ -131,13 +130,16 @@ const AddColorScreen = ( props ) => {
         name: colorName,
         code: hexCode,
       }
+      proceedToAddColor();
       dispatch(updateColor(color));
-      // navigation.navigate('HomeScreen');
+      navigation.navigate("HomeScreen")
     }
     else{
+      const cid = Math.floor(Math.random()*10);
+      setCOlorID(cid);
       proceedToAddColor();
       const color: Color = {
-        id: Math.random(),
+        id: colorID,
         name: colorName,
         code: hexCode,
       }
@@ -153,9 +155,11 @@ const AddColorScreen = ( props ) => {
       name: colorName,
       code: hexCode,
     }
+    proceedToDeleteColor();
     dispatch(deleteColor(color));
     navigation.navigate('HomeScreen');
   }
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>

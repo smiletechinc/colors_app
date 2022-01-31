@@ -1,29 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList } from 'react-native';
-import { IconButton } from '../components/buttons';
+import { View, FlatList, Button, Alert, Image, Text } from 'react-native';
+import { IconButton, LogOutButton } from '../components/buttons';
 import {styles} from './index';
 import { connect, useDispatch } from 'react-redux';
 import { ListItem } from '../components/grid/index';
+import { userstatus } from '../redux/action/userAction';
+import EmptyState from '../components/empty_states/colors_empty_state';
 
 const PlusIcon = require("../resources/images/icon_plus.png");
+const LogOutImage = require("../resources/images/logout_image.png");
 
 type Props = {
   navigation: any;
   route: any;
   reduxColors: any;
   updated: boolean;
+  add: any
 }
 
 let updatedOuter = false;
 
 const HomeScreen: React.FunctionComponent<Props> = (props) => {
-  const {navigation, route, reduxColors, updated} = props;
+  const {navigation, route, reduxColors, updated, add} = props;
   const [isFetching, setIsFetching] = useState(false);
   const [colors, setColors] = useState(reduxColors);
   const [updatingColors, setUpdatingColors] = useState<boolean>(false);
   const [selectedID, setSelectedID] = useState();
 
-
+  const LogAlert = () => {  
+    Alert.alert(
+      'Alert  ',
+      'Are you sure to Logout ',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+        {text: 'OK', onPress: Logout},
+      ],
+      { cancelable: false }
+    )
+}  
+  const Logout = () => {
+    const userAuth: UserObject = {
+      id: "",
+      email: "",
+      name: ""
+    }
+    add(userAuth);
+    Alert.alert("You are logout");
+  navigation.replace('LandingScreen');
+  }
+  useEffect(()=>{
+    navigation.setOptions({
+      headerRight: () => (
+        <LogOutButton icon={LogOutImage} onPress={LogAlert}/>
+      ),
+    })
+  }, [navigation]);
 
   useEffect(() => {
     setColors(reduxColors);
@@ -74,7 +105,7 @@ const renderItem = ({item}) => {
 }
   return (
     <View style={styles.flatcontainer}>
-      <View>
+{colors && colors.length > 0 ?      <View>
         {/* <FlatG colors={colors}/> */}
         <FlatList style = { styles.listContainer }
        data = { colors }
@@ -83,8 +114,14 @@ const renderItem = ({item}) => {
        numColumns={2}
        renderItem = {renderItem}
      />
-        <IconButton onPress={SampleFunction} icon={PlusIcon} />
-      </View>
+        
+      </View> :
+      <EmptyState heading='No colors to show' 
+      description='Please add colors to be previewd'
+      buttonTitle='Add COlor'
+      onPress={SampleFunction}/>}
+
+<IconButton onPress={SampleFunction} icon={PlusIcon} />
     </View>
   );
 }
@@ -97,5 +134,15 @@ const renderItem = ({item}) => {
   }
 }
 
-export default connect(mapStateToProps)(HomeScreen);
+const mapDispatchToProps = dispatch => {
+  console.log("Adding a value && Dispatch is Called");
+  return {
+    add: (usero) => {
+      dispatch(userstatus(usero));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+
 
