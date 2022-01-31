@@ -1,19 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  gridView: {
-    marginTop: 10,
-    flex: 1,
-  },  
+const styles = StyleSheet.create({ 
   itemContainer: {
-  borderStyle: "solid",
-  justifyContent: 'flex-end',
-  borderRadius: 5,
+  justifyContent: 'center',
+  alignItems: "center",     
   marginLeft: 32,
-  marginTop: 8,
-  padding: 10,
-  height: 150,
-  width: 150
+  marginRight: 32,
+  display: "flex",  
+  flex: 1,
   },
   itemName: {
   fontSize: 16,

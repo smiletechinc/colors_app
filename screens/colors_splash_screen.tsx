@@ -5,22 +5,46 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LogoImage from '../components/image_containers/LogoImage';
 import { styles } from './index';
 import { connect, useDispatch } from 'react-redux';
+import {updateColor, updateColors, updateReduxColors} from '../redux/action/colorAction';
+import { fetchColorsService } from './../services/colorsServices';
 
 type Props = {
   navigation:any
   userAuthentication: any,
+  updateColors: any,
+  updateReduxColors: any,
 }
 
 const SplashScreen: React.FunctionComponent<Props> = (props) => {
   
-  const {navigation, userAuthentication} = props;
+  const {navigation, userAuthentication, updateColors, updateReduxColors} = props;
   const [animating, setAnimating] = useState(false);
+
+    const fetchColorsSuccessFailure = (colorsError) => {
+    console.log('colorsError: ', colorsError);
+    updateReduxColors([]);
+    navigation.replace('HomeScreen');
+
+  }
+
+  const fetchColorsSuccess = (colorsData) => {
+    //1. Update redux for colors from firebase
+    //2. Navigate to home
+    console.log('colorsData:', Object.values(colorsData));
+    const colors = Object.values(colorsData);
+    console.log("colors ", colors);
+    updateReduxColors(colors);
+    navigation.replace('HomeScreen');
+  }
+
+
 
   useEffect(() => {
     setTimeout(() => {
       setAnimating(true);
       if(userAuthentication){
-        navigation.replace('HomeScreen');
+        // updateColors()
+        fetchColorsService(fetchColorsSuccess, fetchColorsSuccessFailure)  //call reducrer action
       }
       else {
         navigation.replace('LandingScreen');
@@ -50,6 +74,19 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(SplashScreen);
+const mapDispatchToProps = dispatch => {
+  console.log("Adding a value && Dispatch is Called");
+  return {
+    updateColors: () => {
+      dispatch(updateColors());
+    },
+    updateReduxColors: (updatedcolor) => {
+      dispatch(updateReduxColors(updatedcolor));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
 
 // export default SplashScreen;
+

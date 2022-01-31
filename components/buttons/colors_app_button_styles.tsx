@@ -39,6 +39,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#009688',
         borderRadius: 25,
     },
+    logButtonContainer:{
+        position: 'absolute',
+        width: 48,
+        height: 48,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: -16,
+        bottom: -23    ,
+        backgroundColor: '#ffffff',
+        borderRadius: 25,
+    },
     icon: {
         resizeMode: 'cover',
         width: 24,
