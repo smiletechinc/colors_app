@@ -8,7 +8,8 @@ import AppTextInput from '../components/inputs/colors_app_textinput';
 import { useEffect } from 'react';
 import { styles } from './index';
 import { signInService, registerUserService } from './../services/authenticationServices';
-import ForgetScreen from './colors_forget_password_screen';
+import {ForgetScreen} from './index';
+
 import { connect } from 'react-redux';
 import { userstatus } from '../redux/action/userAction';
 import { Dispatch } from "redux"

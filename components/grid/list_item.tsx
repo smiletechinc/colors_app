@@ -15,7 +15,6 @@ const {color, onPress} = props;
         <View style={[styles.itemContainer, { backgroundColor: color.code }]}>
           <Text style={styles.itemName}>{color.name}</Text>
           <Text style={styles.itemCode}>{color.code}</Text>
-          <Text style={styles.itemCode}>{color.id}</Text>
         </View>
       </TouchableOpacity> 
     );
