@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, Alert} from 'react-native';
+import {Text, View, StyleSheet, Alert, ScrollView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LogImage from '../components/image_containers/LogImage';
@@ -83,34 +83,36 @@ const LoginScreen = props => {
   };
 
   return (
-    <View style={styles.loginContainer}>
-      <LogImage />
-      <View>
+    <ScrollView>
+      <View style={styles.loginContainer}>
+        <LogImage />
+        <View>
+          <AppTextInput
+            placeholder="Enter Email"
+            onChangeText={text => setEmail(text)}
+            defaultValue={email}
+            error={emailErrorDisc}
+          />
+        </View>
         <AppTextInput
-          placeholder="Enter Email"
-          onChangeText={text => setEmail(text)}
-          defaultValue={email}
-          error={emailErrorDisc}
+          placeholder="Enter Password"
+          onChangeText={text => setPaswword(text)}
+          secureTextEntry={true}
+          defaultValue={password}
+          error={passwordError}
         />
+        <PrimaryButton title="Login" onPress={login} />
+        <View>
+          <TextButton title="Forgot Password" onPress={forgotpa} />
+        </View>
+        <Text style={styles.loginText}>
+          If you have not register, then click on
+        </Text>
+        <View>
+          <PrimaryButton title="Register" onPress={register} />
+        </View>
       </View>
-      <AppTextInput
-        placeholder="Enter Password"
-        onChangeText={text => setPaswword(text)}
-        secureTextEntry={true}
-        defaultValue={password}
-        error={passwordError}
-      />
-      <PrimaryButton title="Login" onPress={login} />
-      <View>
-        <TextButton title="Forgot Password" onPress={forgotpa} />
-      </View>
-      <Text style={styles.loginText}>
-        If you have not register, then click on
-      </Text>
-      <View>
-        <PrimaryButton title="Register" onPress={register} />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
