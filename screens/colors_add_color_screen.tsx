@@ -13,6 +13,7 @@ import {
   getIdForNewColor,
 } from './../services/colorsServices';
 import {ConversionHexRGBA} from '../src/hooks/hexRgbaConver';
+import {SCREEN_HEIGHT} from '../constant/index';
 
 const AddColorScreen = props => {
   const {navigation, route, add} = props;
@@ -278,6 +279,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#31A8A8',
+    minHeight: SCREEN_HEIGHT,
   },
   inputView: {
     backgroundColor: '#98d3d3',

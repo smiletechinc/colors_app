@@ -11,6 +11,7 @@ import {
   signUpService,
   registerUserService,
 } from './../services/authenticationServices';
+import {SCREEN_HEIGHT} from '../constant';
 
 const SignupScreen = ({navigation}) => {
   const [name, setName] = useState('');
@@ -94,7 +95,7 @@ const SignupScreen = ({navigation}) => {
 
   return (
     <ScrollView>
-      <View style={styles.loginContainer}>
+      <View style={[styles.loginContainer, {minHeight: SCREEN_HEIGHT}]}>
         <LogImage />
         <View>
           <AppTextInput
